@@ -1,0 +1,13 @@
+If you would like to contribute, please open a github issue:
+
+* https://github.com/Floqq/gae-cookbook/issues
+
+If a contribution adds new platforms or platform versions, indicate
+such in the body of the commit message(s), and update the relevant
+issue. When writing commit messages, it is helpful for others if
+you indicate the issue. For example:
+
+    git commit -m 'closes #33 Improved support for...'
+
+In the issue itself, it is also helpful if you include log output of
+a successful Chef run, but this is not absolutely required.
