@@ -30,12 +30,12 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{gae_zip}" do
   not_if { ::File.exists?(install_path) }
 end
 
-package "unzip" do
+package "gae - unzip" do
   action :install
   retries 3
 end
 
-bash "place gae #{version} at #{install_path}" do
+bash "gae - place #{version} at #{install_path}" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOF
   unzip #{gae_zip}
@@ -44,17 +44,30 @@ bash "place gae #{version} at #{install_path}" do
   not_if { ::File.exists?(install_path) }
 end
 
-bash "install gae" do
+bash "gae - fix sys path" do
+  code <<-EOF
+  echo "import dev_appserver" >> #{install_path}/google/__init__.py
+  echo "dev_appserver.fix_sys_path()" >> #{install_path}/google/__init__.py
+  EOF
+
+  not_if do
+    File.open("#{install_path}/google/__init__.py").read.include?("import dev_appserver")
+  end
+end
+
+bash "gae - install" do
   code <<-EOF
   echo "export PATH=#{install_path}:$PATH
         export PYTHONPATH=#{install_path}:$PYTHONPATH" > #{install_path}/profile
   EOF
 end
 
-bash "setup paths" do
+bash "gae - setup paths" do
   code <<-EOF
   echo "source #{install_path}/profile" >> /etc/bash.bashrc
   EOF
-  
-  not_if { File.open("/etc/bash.bashrc").read.include?("#{install_path}/profile") }
+
+  not_if do
+    File.open("/etc/bash.bashrc").read.include?("#{install_path}/profile")
+  end
 end
