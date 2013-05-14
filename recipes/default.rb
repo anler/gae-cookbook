@@ -30,7 +30,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{gae_zip}" do
   not_if { ::File.exists?(install_path) }
 end
 
-package "gae - unzip" do
+package "unzip" do
   action :install
   retries 3
 end
