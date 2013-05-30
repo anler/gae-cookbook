@@ -18,14 +18,14 @@
 # limitations under the License.
 #
 
-version = node['gae']['version']
+version = node["gae"]["version"]
+prefix = node["gae"]["prefix_dir"]
 gae_dir = "google_appengine"
 gae_zip = "#{gae_dir}_#{version}.zip"
-prefix = node['gae']['prefix_dir']
 install_path = "#{prefix}/#{gae_dir}_#{version}"
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{gae_zip}" do
-  source "#{node['gae']['url']}"
+  source "#{node["gae"]["url"]}"
   mode "0644"
   not_if { ::File.exists?(install_path) }
 end

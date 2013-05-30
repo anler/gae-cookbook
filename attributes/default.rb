@@ -18,12 +18,8 @@
 # limitations under the License.
 #
 
-default['gae']['version'] = '1.7.4'
-default['gae']['url'] = "https://googleappengine.googlecode.com/files/google_appengine_#{default['gae']['version']}.zip"
+default_version = "1.8.0"
 
-case platform
-when "smartos"
-  default['gae']['prefix_dir'] = '/opt/local'
-else
-  default['gae']['prefix_dir'] = '/usr/local'
-end
+default["gae"]["version"] = default_version
+default["gae"]["url"] = "https://googleappengine.googlecode.com/files/google_appengine_#{default_version}.zip"
+default["gae"]["prefix_dir"] = "/opt"
