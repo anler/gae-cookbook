@@ -4,7 +4,7 @@ Google App Engine Cookbook
 Description
 -----------
 
-Installs and configures Google App Engine.
+Install and configure Google App Engine SDK for Python.
 
 Requirements
 ------------
@@ -17,16 +17,11 @@ Requirements
 Attributes
 ----------
 
-See attributes/default.rb for default values.
+See ``attributes/default.rb`` for more details.
 
-* ``node["gae"]["version"]`` - which version of gae you want to install, default ``1.7.4``.
-* ``node["gae"]["url"]`` - from where you want to download the installation files, default to Google Servers.
-
-
-The file also contains the following attributes:
-
-* platform specific locations and settings.
-* source installation settings
+* ``node["gae"]["version"]`` - Which version of the SDK to install, default is **1.8.0**
+* ``node["gae"]["url"]`` - URL to download the SDK files, default is Google Servers.
+* ``node["gae"]["prefix_dir"]`` - Where to store SDK files in the filesystem, default is ``/opt``
 
 License and Author
 ------------------
