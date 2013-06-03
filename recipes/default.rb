@@ -62,12 +62,8 @@ bash "gae - install" do
   EOF
 end
 
-bash "gae - setup paths" do
-  code <<-EOF
-  echo "source #{install_path}/profile" >> /etc/bash.bashrc
-  EOF
-
-  not_if do
-    File.open("/etc/bash.bashrc").read.include?("#{install_path}/profile")
-  end
+template "/usr/local/bin/configure_appengine" do
+  source "configure_appengine.erb"
+  variables({:install_path => install_path})
+  mode 0755
 end
