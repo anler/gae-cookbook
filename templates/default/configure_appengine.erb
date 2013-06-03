@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+function help {
+  echo "usage: $NAME [shell_name]"
+  echo "shell_name: name of your shell, default to \$SHELL"
+  error
+}
+
+function error () {
+  msg=$1
+  if [[ msg ]]; then
+    echo $msg
+  fi
+  exit 1
+}
+
+
+if [ $# -eq 0 ]; then
+  shellname=$SHELL
+elif [ $# -eq 1 ]; then
+  if [ `which $1` &> /dev/null ]; then
+    shellname=$1
+  else
+    error "couldn't find '$1' shell"
+  fi
+else
+  help
+fi
+
+configrc="$HOME/.`basename $shellname`rc"
+if [ ! `grep "<%= @install_path %>" $configrc` &> /dev/null ]; then
+  echo "source <%= @install_path %>/profile" >> $configrc
+fi
