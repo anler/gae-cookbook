@@ -14,6 +14,20 @@ Requirements
 * Debian, Ubuntu
 * CentOS, Red Hat, Fedora
 
+Usage
+-----
+
+The only requirement to get app engine working is that you run the following
+once you first login into your virtual machine or everytime you change your
+default shell (this is something we are going to try to solve in the future):
+
+    vagrant ssh
+    configure_appengine
+    source .`basename $SHELL`rc
+
+That will append the necessary path configuration command to your shell config
+file (.bashrc, .zshrc, or the like).
+
 Attributes
 ----------
 
