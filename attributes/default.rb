@@ -21,5 +21,5 @@
 default_version = "1.8.0"
 
 default["gae"]["version"] = default_version
-default["gae"]["url"] = "https://googleappengine.googlecode.com/files/google_appengine_#{default_version}.zip"
+default["gae"]["url"] = "https://googleappengine.googlecode.com/files/google_appengine_%s.zip"
 default["gae"]["prefix_dir"] = "/opt"
