@@ -28,6 +28,5 @@ else
 fi
 
 configrc="$HOME/.`basename $shellname`rc"
-if [ ! `grep "<%= @install_path %>" $configrc` &> /dev/null ]; then
-  echo "source <%= @install_path %>/profile" >> $configrc
-fi
+sed /google_appengine_\d\.\d\.\d\\/profile/d $configrc > $configrc
+echo "source <%= @install_path %>/profile" >> $configrc
